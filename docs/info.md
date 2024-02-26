@@ -9,7 +9,8 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+If `key` is high, then a statemachine will not work.('led = 1111')
+If `key` is low, the bidirectional pins are mirrored to the output pins (`data_o` = `data_i`).
 
 ## How to test
 
