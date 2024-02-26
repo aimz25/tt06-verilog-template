@@ -15,6 +15,9 @@ jobs:
 
       - name: Build GDS
         uses: TinyTapeout/tt-gds-action@tt06
+        with:
+          ena: false # 添加一个参数以禁用ena端口的访问
+
   
   precheck:
     needs: gds
@@ -34,6 +37,8 @@ jobs:
 
       - name: GL test
         uses: TinyTapeout/tt-gds-action/gl_test@tt06
+        with:
+          ena: false # 同样添加参数以禁用ena端口的访问
 
   viewer:
     needs: gds
