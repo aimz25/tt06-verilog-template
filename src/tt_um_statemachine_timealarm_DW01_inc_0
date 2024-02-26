@@ -4,7 +4,7 @@
 // Block Name: statemachine_timealarm
 // User Label: 
 // Write Command: write_verilog -include { all } ../results/statemachine_dft_compiled.v
-module statemachine_timealarm_DW01_inc_0 ( A , SUM , VSS , VDD ) ;
+module tt_um_statemachine_timealarm_DW01_inc_0 ( A , SUM , VSS , VDD ) ;
 input  [27:0] A ;
 output [27:0] SUM ;
 input  VSS ;
