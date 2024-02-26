@@ -14,7 +14,11 @@ module tt_um_johnson (
             if (ui_in[0])
                 uo_out = 8'b0000_0000;
             else
-                uo_out ={~uo_out[7],uo_out[0:7-1]};
+                uo_out = {~uo_out[7],uo_out[0:6]};
         end
-
+    
+assign uo_out  = ui_in + uio_in;
+assign uio_out = 0;
+assign uio_oe  = 0;
+    
 endmodule
