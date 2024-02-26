@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project: 
-  title:        "Statemachine_dft"      # Project title
+  title:        "Johnson_counter"      # Project title
   author:       "Xianshun Song"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "TinyTapeout a statemachine_dft"      # One line description of what your project does
@@ -11,17 +11,17 @@ project:
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_statemachine_timealarm_DW01_inc_0"
+  top_module:  "tt_um_johnson"
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:        
-    - "tt_um_statemachine_timealarm_DW01_inc_0.v"
+    - "tt_um_johnson.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
   ui[0]: "clk"
-  ui[1]: "led"
+  ui[1]: "r"
   ui[2]: ""
   ui[3]: ""
   ui[4]: ""
@@ -30,14 +30,14 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: "led[0]"
-  uo[1]: "led[1]"
-  uo[2]: "led[2]"
-  uo[3]: "led[3]"
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "out[0]"
+  uo[1]: "out[1]"
+  uo[2]: "out[2]"
+  uo[3]: "out[3]"
+  uo[4]: "out[4]"
+  uo[5]: "out[5]"
+  uo[6]: "out[6]"
+  uo[7]: "out[7]"
 
   # Bidirectional pins
   uio[0]: ""
