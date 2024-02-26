@@ -1,19 +1,21 @@
-module tt_um_johnson (clk, r, ena, rst_n, out);
-
-parameter size =7;
-input clk;
-input r;
-input ena, rst_n;
-output [0:size] out;
-
-reg [0:size] out;
+module tt_um_johnson (    
+    input  wire [7:0] ui_in,    // Dedicated inputs
+    output reg [7:0] out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n,     // reset_n - low to reset
+    input  wire       r
+        );
 
 always @(posedge clk or posedge r)
         begin
             if (r)
                 out = 8'b0000_0000;
             else
-                out ={~out[size],out[0:size-1]};
+                    out ={~out[7],out[0:7-1]};
         end
 
 endmodule
