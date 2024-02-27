@@ -9,9 +9,9 @@ module tt_um_johnson (
     input  wire       rst_n,     // reset_n - low to reset
         );
 
-    always @(posedge clk or posedge ui_in[0])
+    always @(posedge clk or posedge rst_n)
         begin
-            if (ui_in[0])
+            if (rst_n)
                 uo_out = 8'b0000_0000;
             else
                 uo_out = {~uo_out[7],uo_out[0:6]};
@@ -20,5 +20,8 @@ module tt_um_johnson (
 assign uo_out  = ui_in + uio_in;
 assign uio_out = 0;
 assign uio_oe  = 0;
+assign ena  = 0;
+assign ui_in  = 0;
+assign uio_in  = 0;
     
 endmodule
