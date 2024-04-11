@@ -9,19 +9,65 @@ module tt_um_opt_encryptor (
     input  wire       rst_n,     // reset_n - low to reset
         );
 
-    always @(posedge clk or posedge rst_n)
-        begin
-            if (rst_n)
-                uo_out = 8'b0000_0000;
-            else
-                uo_out = {~uo_out[7],uo_out[0:6]};
-        end
-    
-assign uo_out  = ui_in + uio_in;
-assign uio_out = 0;
-assign uio_oe  = 0;
-assign ena  = 0;
-assign ui_in  = 0;
-assign uio_in  = 0;
+wire [7:0] data;
+wire [7:0] pad_read;
+wire [7:0] pad_gen;
+wire [2:0] r_num;
+reg[2:0] count = 4'd0;
+wire decrypt;
+
+wire[7:0] out;
+reg [2:0] index_out;
+
+
+// io
+assign data = ui_in[7:0];
+assign decrypt = uio_in[0];
+assign r_num = uio_in[3:1];
+
+assign uo_out[7:0] = out[7:0];
+assign uio_out[6:4] = index_out[2:0];
+assign uio_out[7] = 1'b0;
+
+assign uio_oe = 8'b11110000;
+
+
+register_file rf (
+.reset(~rst_n),
+.clock(clk),
+.we(ena & decrypt),
+.a1(r_num),
+.wd(pad_gen),
+.wa(count),
+.rd1(pad_read));
+
+
+LFSR_PRNG rng(
+    .clk(clk),
+    .rst(~rst_n),
+    .prn(pad_gen));
+
+assign out = ena ? (decrypt ? (pad_read ^ data) : (pad_gen ^ data)) : 8'h00;
+	 
+always @ (posedge clk) begin
+	if (~rst_n) begin
+		count = 4'd0;
+	end
+	else if (ena) begin
+		if (decrypt) begin
+			index_out = 3'h0;
+		end
+		else begin // encrypt
+			if(count == 3'b111) begin
+				index_out = count;
+				count = 3'b000;
+			end
+			else begin
+				index_out = count;
+				count = count + 4'd1;
+			end
+		end
+	end
+end
     
 endmodule
